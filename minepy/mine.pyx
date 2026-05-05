@@ -265,11 +265,11 @@ def pstats(X, alpha=0.6, c=15, est="mic_approx"):
     shape[0] = <np.npy_intp> pstats.n
     mica = np.PyArray_SimpleNewFromData(1, shape, np.NPY_DOUBLE,
                                         <void *> pstats.mic)
-    np.PyArray_UpdateFlags(mica, mica.flags.num | np.NPY_OWNDATA)
+    np.PyArray_UpdateFlags(mica, mica.flags.num | 0x0004)
 
     tica = np.PyArray_SimpleNewFromData(1, shape, np.NPY_DOUBLE,
                                         <void *> pstats.tic)
-    np.PyArray_UpdateFlags(tica, tica.flags.num | np.NPY_OWNDATA)
+    np.PyArray_UpdateFlags(tica, tica.flags.num | 0x0004)
 
     free(pstats)
 
@@ -351,11 +351,11 @@ def cstats(X, Y, alpha=0.6, c=15, est="mic_approx"):
     shape[1] = <np.npy_intp> cstats.m
     mica = np.PyArray_SimpleNewFromData(2, shape, np.NPY_DOUBLE,
                                         <void *> cstats.mic)
-    np.PyArray_UpdateFlags(mica, mica.flags.num | np.NPY_OWNDATA)
+    np.PyArray_UpdateFlags(mica, mica.flags.num | 0x0004)
 
     tica = np.PyArray_SimpleNewFromData(2, shape, np.NPY_DOUBLE,
                                         <void *> cstats.tic)
-    np.PyArray_UpdateFlags(tica, tica.flags.num | np.NPY_OWNDATA)
+    np.PyArray_UpdateFlags(tica, tica.flags.num | 0x0004)
 
     free(cstats)
 
