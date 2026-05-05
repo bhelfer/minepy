@@ -1,6 +1,6 @@
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
-from pkg_resources import get_platform
+from sysconfig import get_platform
 
 
 # import numpy only when it is needed
