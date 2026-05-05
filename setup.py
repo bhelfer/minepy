@@ -1,12 +1,13 @@
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 from sysconfig import get_platform
+from Cython.Build import cythonize
+import numpy
 
 
-# import numpy only when it is needed
+# Extend include_dirs before cythonize so numpy headers are found
 class build_ext_custom(build_ext):
     def run(self):
-        import numpy
         self.include_dirs.append(numpy.get_include())
         build_ext.run(self)
 
@@ -15,12 +16,13 @@ if get_platform() == "win32" or get_platform() == "win-amd64":
 else:
     libraries = ['m']
 
-ext_modules = [
+ext_modules = cythonize([
     Extension("minepy.mine",
-              ["minepy/mine.c", "libmine/mine.c"],
+              ["minepy/mine.pyx", "libmine/mine.c"],
+              include_dirs=[numpy.get_include()],
               libraries=libraries,
               extra_compile_args=['-Wall'])
-    ]
+])
 
 classifiers = [
     'Development Status :: 5 - Production/Stable',
